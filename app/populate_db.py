@@ -2,32 +2,36 @@ from app import create_app, db
 from models.models import User
 
 app = create_app()
+app.app_context().push()  # Push the app context to ensure correct app binding
+
+# Initialize the SQLAlchemy instance with the Flask app
+db.init_app(app)
 
 with app.app_context():
     # Create five example users
     users_data = [
         {
-            'email': 'John@example.com',
+            'email': 'user1@example.com',
             'first_name': 'John',
             'last_name': 'Doe'
         },
         {
-            'email': 'Jane@example.com',
+            'email': 'user2@example.com',
             'first_name': 'Jane',
             'last_name': 'Smith'
         },
         {
-            'email': 'Alice@example.com',
+            'email': 'user3@example.com',
             'first_name': 'Alice',
             'last_name': 'Johnson'
         },
         {
-            'email': 'Bob@example.com',
+            'email': 'user4@example.com',
             'first_name': 'Bob',
             'last_name': 'Williams'
         },
         {
-            'email': 'Emily@example.com',
+            'email': 'user5@example.com',
             'first_name': 'Emily',
             'last_name': 'Brown'
         }

@@ -1,10 +1,14 @@
 import os
-from flask import Flask, jsonify
+from flask import Flask
 from flask_marshmallow import Marshmallow
+from flask_migrate import Migrate
+from dotenv import load_dotenv
 
 from routes.routes import init_routes
+from models.models import db
+from crud.user_crud import UserCrud
 
-
+load_dotenv()
 
 def create_app(test_config=None):
 
@@ -19,18 +23,19 @@ def create_app(test_config=None):
     if db_uri is None:
         raise ValueError("No SQLALCHEMY_DATABASE_URI set for Flask application")
 
-    # app.config["SECRET_KEY"] = "some_dev_key" #Here
-    # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://usr:pwd@pgsql:5432/todos" #Here
     app.config["SECRET_KEY"] = secret_key
     app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 
+    ma = Marshmallow(app)
+    db.init_app(app)
+    migrate = Migrate(app, db)
+
+    user_crud = UserCrud()
+
     # Initialize Routes
-    init_routes(app)
+    init_routes(user_crud, app)
 
     print("THIS FUNCTION IS BEING CALLED")
 
     return app
 
-def create_ma(app):
-    ma = Marshmallow(app)
-    return ma
