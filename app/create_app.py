@@ -1,5 +1,6 @@
 import os
 from flask import Flask, jsonify
+from flask_marshmallow import Marshmallow
 
 from routes.routes import init_routes
 
@@ -20,13 +21,16 @@ def create_app(test_config=None):
 
     # app.config["SECRET_KEY"] = "some_dev_key" #Here
     # app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://usr:pwd@pgsql:5432/todos" #Here
-    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("SQLALCHEMY_DATABASE_URI")
+    app.config["SECRET_KEY"] = secret_key
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 
-
-    # initializing routes
+    # Initialize Routes
     init_routes(app)
 
     print("THIS FUNCTION IS BEING CALLED")
 
     return app
+
+def create_ma(app):
+    ma = Marshmallow(app)
+    return ma
