@@ -59,4 +59,3 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 todo_schema = TodoSchema()
 todos_schema = TodoSchema(many=True)
 user_schema = UserSchema()
-users_schema = UserSchema(many=True)

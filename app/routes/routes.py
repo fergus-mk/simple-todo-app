@@ -1,5 +1,7 @@
 from flask import jsonify
 
+from app.models.test_ma_model import user_schema
+
 def init_routes(app):
 
     @app.route("/api", methods=["GET"])
@@ -9,3 +11,9 @@ def init_routes(app):
             "success": True,
             "data": None
         }), 200
+    
+    @app.route("/api/test_marshmallow", methods=["GET"])
+    def test_marshmallow():
+        # Test marshmallow by serializing some data
+        user = {"name": "John Doe", "email": "john@example.com"}
+        return user_schema.dump(user), 200
