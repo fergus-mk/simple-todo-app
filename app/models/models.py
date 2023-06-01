@@ -1,10 +1,9 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
+# from flask_sqlalchemy import SQLAlchemy # REMOVED
+# from flask_marshmallow import Marshmallow # REMOVED
 from marshmallow import fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from app.extensions.extensions import db, ma
 
-db = SQLAlchemy()
-ma = Marshmallow()
 
 class Todo(db.Model):
     __tablename__ = "todo"

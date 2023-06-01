@@ -1,4 +1,5 @@
-from flask_marshmallow import Marshmallow  # NEW
+from flask_marshmallow import Marshmallow
+from flask_sqlalchemy import SQLAlchemy
 
-
-ma = Marshmallow()  # NEW
+ma = Marshmallow()
+db = SQLAlchemy() 
