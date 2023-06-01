@@ -1,8 +1,7 @@
-# from dotenv import load_dotenv # REMOVED
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
 
-from app import create_app #, create_ma # REMOVED
-from app.models.models import User, Todo # ADDED
+from app import create_app
+# from app.models.models import User, Todo
 
 app = create_app()
 
