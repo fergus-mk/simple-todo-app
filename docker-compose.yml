@@ -9,7 +9,7 @@ services:
     depends_on:
       - pgsql
     environment:
-      - FLASK_APP=app.py
+      - FLASK_APP=app:create_app # This could be app only
       - FLASK_RUN_HOST=0.0.0.0
 
   pgsql:

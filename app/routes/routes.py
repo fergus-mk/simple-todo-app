@@ -15,5 +15,5 @@ def init_routes(app):
     @app.route("/api/test_marshmallow", methods=["GET"])
     def test_marshmallow():
         # Test marshmallow by serializing some data
-        user = {"name": "John Doe", "email": "john@example.com"}
+        user = {"name": "Fergus Dergus", "email": "john@example.com"}
         return user_schema.dump(user), 200
