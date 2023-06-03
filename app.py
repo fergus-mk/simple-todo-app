@@ -1,7 +1,4 @@
-# from flask_migrate import Migrate
-
 from app import create_app
-# from app.models.models import User, Todo
 
 app = create_app()
 
