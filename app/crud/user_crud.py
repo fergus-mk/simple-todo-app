@@ -27,3 +27,4 @@ def create_user(user: User):
         db.session.add(new_user)
         db.session.commit()
         return user_schema.dump(new_user), 201
+    

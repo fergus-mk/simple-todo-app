@@ -29,7 +29,7 @@ def init_routes(app):
     def post_user():
         user = request.get_json()
         if not user:
-            return user_not_provided
+            return user_not_provided   # THIS ISN't working - already error from no JSON
         try:
             new_user, status = user_crud.create_user(user)
             return jsonify(new_user), status
