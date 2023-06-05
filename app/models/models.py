@@ -30,6 +30,7 @@ class User(db.Model):
     email = db.Column(db.String(50), unique=True)
     first_name = db.Column(db.String(50))
     last_name = db.Column(db.String(50))
+    password = db.Column(db.String, nullable=False)
 
     todos = db.relationship(
         Todo,
