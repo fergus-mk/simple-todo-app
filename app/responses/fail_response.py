@@ -18,6 +18,18 @@ def user_not_provided():
         f"User not provided"
     )
 
+def invalid_username_or_password():
+    abort(
+        400,
+        f"Invalid username or password"
+    )
+
+def password_not_valid():
+    abort(
+        400,
+        f"Password must be at least 5 characters long and contain at least one digit and special character"
+    )
+
 def wrong_len_response(choice: str, type_describe: str):
     if choice=="short":
         abort(
@@ -29,6 +41,12 @@ def wrong_len_response(choice: str, type_describe: str):
             400,
             f"{type_describe} is too long, it cannot be more than 50 characters"
         )
+
+def token_not_found():
+    abort(
+        401,
+        f"Token not found"
+    )
 
 def user_not_found(email):
     abort(
