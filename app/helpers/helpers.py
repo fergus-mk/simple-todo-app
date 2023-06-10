@@ -2,7 +2,7 @@ from flask import request, jsonify
 import jwt 
 
 from app.models.models import User
-from app.responses.fail_response import token_not_found
+from .responses.fail_response import token_not_found
 from app.config.config import Config
 
 
