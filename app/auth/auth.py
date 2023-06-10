@@ -5,7 +5,8 @@ from flask import request, jsonify, abort
 from functools import wraps
 
 from app.models.models import User
-from app.responses.fail_response import invalid_username_or_password
+from app.helpers.responses import fail_response
+
 from app.config.config import Config
 
 config = Config()
@@ -16,12 +17,12 @@ def login():
     password = data.get('password')
 
     if email is None or password is None:
-        return invalid_username_or_password()
+        return fail_response.invalid_username_or_password()
 
     user = User.query.filter(User.email == email).first()
 
     if user is None or not bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')): # CHANGED THE PASSWORD ACCESS
-        return invalid_username_or_password()
+        return fail_response.invalid_username_or_password()
 
     token = generate_token(email)
     return token
