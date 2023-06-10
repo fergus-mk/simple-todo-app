@@ -1,8 +1,6 @@
 from flask import jsonify, request # ADDED request
 from flasgger import swag_from
 
-from app.models.test_ma_model import user_schema
-from app.responses.fail_response import user_not_provided
 from app.crud import user_crud
 from app.auth.auth import login, token_required
 
