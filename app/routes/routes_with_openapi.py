@@ -1,4 +1,4 @@
-from flask import jsonify, request # ADDED request
+from flask import jsonify, request
 from flasgger import swag_from
 
 from app.crud import user_crud

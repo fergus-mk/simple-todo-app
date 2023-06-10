@@ -1,5 +1,6 @@
 import re
 from email_validator import validate_email, EmailNotValidError
+
 from .responses import fail_response
 
 def check_email_is_valid(email: str):
@@ -34,6 +35,7 @@ def check_password_is_valid(password: str):
         pass
 
 def check_all_fields(user_data):
+    """Checks if all fields contained in user data"""
     required_fields = ["email", "first_name", "last_name", "password"]
     missing_fields = [field for field in required_fields if field not in user_data]
 

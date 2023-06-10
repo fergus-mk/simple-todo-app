@@ -1,5 +1,6 @@
 from flask import abort
 
+# 400 Bad Request errors
 def email_not_valid(error):
     abort(
         400,
@@ -16,12 +17,6 @@ def user_not_provided():
     abort(
         400,
         f"User not provided"
-    )
-
-def invalid_username_or_password():
-    abort(
-        400,
-        f"Invalid username or password"
     )
 
 def password_not_valid():
@@ -42,30 +37,6 @@ def wrong_len_response(choice: str, type_describe: str):
             f"{type_describe} is too long, it cannot be more than 50 characters"
         )
 
-def token_not_found(): # 401 is unauthorised - this needs changed 
-    abort(
-        401,
-        f"Token not found"
-    )
-
-def todo_not_found(id):
-    abort(
-        401,
-        f"Todo with id: {id} not found"
-    )
-
-def user_not_found(email):
-    abort(
-        404, 
-        f"User with email {email} not found"
-    )
-
-def user_already_exists(email):
-    abort(
-        406,
-        f"User with email: {email} already exists"
-    )
-
 def missing_user_fields_error():
     abort(
         400,
@@ -84,20 +55,41 @@ def missing_content_and_priority():
         "Please provide content and/or priority"
     )
 
-def wrong_len_response(choice: str, type_describe: str):
-    if choice=="short":
-        abort(
-            400,
-            f"{type_describe} is too short, it must be at least 2 characters"
-        )
-    elif choice=="long":
-        abort(
-            400,
-            f"{type_describe} is too long, it cannot be more than 50 characters"
-        )
-
 def priority_out_of_range():
         abort(
             400,
             "Priority must be from 0-5"
         )
+
+# 401 Unauthorized errors
+def invalid_username_or_password():
+    abort(
+        401,
+        f"Invalid username or password"
+    )
+
+def token_not_found():
+    abort(
+        401,
+        f"Token not found"
+    )
+
+# 404 Not Found errors
+def todo_not_found(id):
+    abort(
+        404,
+        f"Todo with id: {id} not found"
+    )
+
+def user_not_found(email):
+    abort(
+        404, 
+        f"User with email {email} not found"
+    )
+
+# 409 Conflict errors
+def user_already_exists(email):
+    abort(
+        409,
+        f"User with email: {email} already exists"
+    )

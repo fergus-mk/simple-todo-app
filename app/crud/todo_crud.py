@@ -1,9 +1,9 @@
 from flask import request
 
-from app.models.models import User, Todo, todo_schema, todos_schema
 from app.helpers import validators, helpers
 from app.helpers.extensions import db
 from app.helpers.responses import fail_response, success_response
+from app.models.models import User, Todo, todo_schema, todos_schema
 
 def create_todo_for_user(todo: Todo):
     """Creates a todo for current active user"""
