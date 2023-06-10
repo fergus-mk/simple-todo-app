@@ -1,45 +1,17 @@
 import bcrypt
 from flask import request
 
-from app.models.models import User, user_load_schema, user_dump_schema # HERE
 from app.helpers import validators, helpers
 from app.helpers.extensions import db
 from app.helpers.responses import fail_response, success_response
+from app.models.models import User, user_load_schema, user_dump_schema
 
-
-# def create_user(user: User):
-#     "Takes User object and uses it to create user in user table, assigns a unique id"
-#     validators.check_all_fields(user)
-
-#     email = user.get("email")
-#     password = user.get("password").encode('utf-8')
-
-#     validators.check_email_is_valid(email)
-#     validators.check_name_is_valid(user.get("first_name"))
-#     validators.check_name_is_valid(user.get("last_name"))
-#     validators.check_password_is_valid(user.get("password"))
-
-#     existing_user = User.query.filter(User.email == email).first()
-#     if existing_user:
-#         return fail_response.user_already_exists(email)
-#     else:
-#         salt = bcrypt.gensalt()
-#         hashed_password = bcrypt.hashpw(password, salt)
-#         user["password"] = hashed_password.decode('utf-8')
-
-#         print("LOOK HERE!!!!!!!!!!!!!!!!!!!!!")
-#         print(user)  # Add this line to debug
-
-#         new_user = user_load_schema.load(user, session=db.session)
-#         db.session.add(new_user)
-#         db.session.commit()
-#         return user_dump_schema.dump(new_user), 201
 
 def create_user(user: User):
-    # ...
+    """Create a new user"""
     email = user.get("email")
     password = user.get("password").encode('utf-8')
-
+    
     validators.check_email_is_valid(email)
     validators.check_name_is_valid(user.get("first_name"))
     validators.check_name_is_valid(user.get("last_name"))
@@ -49,6 +21,7 @@ def create_user(user: User):
     if existing_user:
         return fail_response.user_already_exists(email)
     else:
+        # Hashing password
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(password, salt)
         user["password"] = hashed_password.decode('utf-8')
@@ -57,7 +30,8 @@ def create_user(user: User):
         password = user.pop("password")
         new_user = user_load_schema.load(user, session=db.session)
         new_user.password = password
-
+        
+        # Save new user to db
         db.session.add(new_user)
         db.session.commit()
         return user_dump_schema.dump(new_user), 201
