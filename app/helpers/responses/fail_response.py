@@ -42,10 +42,16 @@ def wrong_len_response(choice: str, type_describe: str):
             f"{type_describe} is too long, it cannot be more than 50 characters"
         )
 
-def token_not_found():
+def token_not_found(): # 401 is unauthorised - this needs changed 
     abort(
         401,
         f"Token not found"
+    )
+
+def todo_not_found(id):
+    abort(
+        401,
+        f"Todo with id: {id} not found"
     )
 
 def user_not_found(email):
@@ -59,3 +65,39 @@ def user_already_exists(email):
         406,
         f"User with email: {email} already exists"
     )
+
+def missing_user_fields_error():
+    abort(
+        400,
+        f"Missing required field(s) in user data must contain email, first name, last name and password "
+    )
+
+def missing_names():
+    abort(
+        400,
+        "Please provide fist name and/or last name"
+    )
+
+def missing_content_and_priority():
+    abort(
+        400,
+        "Please provide content and/or priority"
+    )
+
+def wrong_len_response(choice: str, type_describe: str):
+    if choice=="short":
+        abort(
+            400,
+            f"{type_describe} is too short, it must be at least 2 characters"
+        )
+    elif choice=="long":
+        abort(
+            400,
+            f"{type_describe} is too long, it cannot be more than 50 characters"
+        )
+
+def priority_out_of_range():
+        abort(
+            400,
+            "Priority must be from 0-5"
+        )
