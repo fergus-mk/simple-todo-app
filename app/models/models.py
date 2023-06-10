@@ -1,8 +1,6 @@
-# from flask_sqlalchemy import SQLAlchemy # REMOVED
-# from flask_marshmallow import Marshmallow # REMOVED
 from marshmallow import fields
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-from app.extensions.extensions import db, ma
+from app.helpers.extensions import db, ma
 
 
 class Todo(db.Model):
@@ -43,19 +41,35 @@ class User(db.Model):
         return f"User {self.first_name} {self.last_name} with email {self.email}"
 
 
-class UserSchema(ma.SQLAlchemyAutoSchema):
+class UserLoadSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
         load_instance = True
         sqla_Session = db.session
         include_relationships = True  # This means it will also go into neighbouring schema
+        exclude = ("id", "password")
+
+    email = fields.Str()
+    first_name = fields.Str()
+    last_name = fields.Str()
+    password = fields.Str()
+    todos = fields.Nested(TodoSchema, many=True)
+
+
+class UserDumpSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        load_instance = True
+        sqla_Session = db.session
+        include_relationships = True  # This means it will also go into neighbouring schema
+        exclude = ("id", "password")
 
     email = fields.Str()
     first_name = fields.Str()
     last_name = fields.Str()
     todos = fields.Nested(TodoSchema, many=True)
 
-
 todo_schema = TodoSchema()
 todos_schema = TodoSchema(many=True)
-user_schema = UserSchema()
+user_load_schema = UserLoadSchema()
+user_dump_schema = UserDumpSchema()
