@@ -178,4 +178,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 ## Acknowledgments
 
-I would like to acknoweldge insperation from: [Real Python REST API Tutorial](https://realpython.com/flask-connexion-rest-api/)
+- I would like to acknowledge insparation from: [Real Python REST API Tutorial](https://realpython.com/flask-connexion-rest-api/)
+- Also thanks to Josh Rosenfeld for help with authentication 
