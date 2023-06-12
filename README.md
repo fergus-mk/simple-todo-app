@@ -1,6 +1,6 @@
 # Todo App API
 
-This is an API for a Todo App built using Flask and SQLAlchemy (with a PostgreSQL database). The API provides a way to manage users and their todo items. The API uses token-based authentication. The API is dockerised and has database migration functionaliy.
+This is an API for a Todo App built using Flask and SQLAlchemy (with a PostgreSQL database). Todo App provides a way to manage users and their todo items. The API uses token-based authentication, it is dockerised and has database migration functionaliy.
 
 ## Getting Started
 
